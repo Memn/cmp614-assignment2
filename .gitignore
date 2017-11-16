@@ -1,0 +1,30 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.iml
+out
+gen### Gradle template
+.gradle
+/.idea/
+/build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+*.zip
+*.7z
+*.tar.gz
+*.rar
+hs_err_pid*
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+assign2.articles
+toefl.txt
+toefl_stemmed.txt
