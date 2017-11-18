@@ -3,12 +3,16 @@
  */
 
 import com.google.common.collect.Table;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class AppTest {
@@ -36,14 +40,69 @@ public class AppTest {
         App app = new App();
         Set<String> vocabulary = app.buildVocabulary(TEST_ARTICLES_FILE_PATH);
         System.out.println("vocab size: " + vocabulary.size());
+        System.out.println(vocabulary.toString());
 
     }
 
     @Test
-    public void testBuildDocumentTermMatrix() throws Exception {
+    public void testBuildTermDocumentMatrix() throws Exception {
         App app = new App();
-        Table<String, Long, Long> documentTermMatrix = app.buildTermDocumentMatrix(TEST_ARTICLES_FILE_PATH);
+        Set<String> vocabulary = app.buildVocabulary(TEST_ARTICLES_FILE_PATH);
+        System.out.println(vocabulary.size());
+
+        Table<String, Integer, Integer> documentTermMatrix = app.buildTermDocumentMatrix(TEST_ARTICLES_FILE_PATH, vocabulary);
         System.out.println("vocabulary size: " + documentTermMatrix.rowKeySet().size());
         System.out.println("document size: " + documentTermMatrix.columnKeySet().size());
+        System.out.println("Matrix:");
+//        documentTermMatrix.rowKeySet().forEach(word -> System.out.println(documentTermMatrix.row(word).toString()));
+
+    }
+
+    @Test
+    public void testGenerateRandomIV() throws Exception {
+        App app = new App();
+        List<Short> randomIV = app.generateRandomIV(0.1);
+        Assert.assertEquals(randomIV.stream().filter(n -> n == 1).count(), 10);
+        Assert.assertEquals(randomIV.stream().filter(n -> n == -1).count(), 10);
+        Assert.assertEquals(randomIV.stream().filter(n -> n == 0).count(), 80);
+
+        randomIV = app.generateRandomIV(0.32);
+        Assert.assertEquals(randomIV.stream().filter(n -> n == 1).count(), 32);
+        Assert.assertEquals(randomIV.stream().filter(n -> n == -1).count(), 32);
+        Assert.assertEquals(randomIV.stream().filter(n -> n == 0).count(), 36);
+        System.out.println(StringUtils.join(randomIV));
+
+    }
+
+    @Test
+    public void testGenerateRandomVector() throws Exception {
+        App app = new App();
+        Map<Integer, Double> randomVector = app.generateRandomVector(0.12, app.generateRandomIV(0.3), 20);
+        Assert.assertEquals(randomVector.size(), 20);
+        Assert.assertNotEquals("All are same!", randomVector.values().stream().distinct().count(), 1);
+
+        randomVector = app.generateRandomVector(0.12, app.generateRandomIV(0.3151), 600);
+        Assert.assertEquals(randomVector.size(), 600);
+        Assert.assertNotEquals("All are same!", randomVector.values().stream().distinct().count(), 1);
+
+
+    }
+
+    @Test
+    public void testReduceTermDocumentMatrix() throws Exception {
+        App app = new App();
+        int k = 600;
+        int e = 50;
+
+        Set<String> vocabulary = app.buildVocabulary(WIKI_ARTICLES_FILE_PATH);
+        System.out.println("Vocabulary size: " + vocabulary.size());
+
+        Table<String, Integer, Integer> termDocumentMatrix = app.buildTermDocumentMatrix(WIKI_ARTICLES_FILE_PATH, vocabulary);
+        Table<String, Integer, Double> reducedMatrix;
+        reducedMatrix = app.reduceTermDocumentMatrix(termDocumentMatrix, k, e);
+        Assert.assertEquals(reducedMatrix.columnKeySet().size(), k);
+        Assert.assertEquals(reducedMatrix.rowKeySet().size(), termDocumentMatrix.rowKeySet().size());
+
+
     }
 }
