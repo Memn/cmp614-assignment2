@@ -25,6 +25,6 @@ hs_err_pid*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-assign2.articles
+assign2*.articles
 toefl.txt
 toefl_stemmed.txt
