@@ -1,12 +1,13 @@
 **MODIFICATIONS**
 
-I have used the cosine similarity function for the weighting. And Did not add much modifications.
+I have used the cosine similarity function for the weighting. And did not add much modifications.
 
 **TRICKS**
 
 I have just added random guesses for words, which are not present in the vocabulary.
 Also, I have removed words, which contains digits or having all characters are same.
 I did not make much tricks except the in the hint file.
+I tried to add Word2Word too but it has some errors for now.
 
 **RESULTS**
 
