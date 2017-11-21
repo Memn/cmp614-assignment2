@@ -1,0 +1,119 @@
+**MODIFICATIONS**
+
+I have used the cosine similarity function for the weighting. And Did not add much modifications.
+
+**TRICKS**
+
+I have just added random guesses for words, which are not present in the vocabulary.
+Also, I have removed words, which contains digits or having all characters are same.
+I did not make much tricks except the in the hint file.
+
+**RESULTS**
+
+**Result 1**
+
+Welcome to Toefl word matcher.
+Looking for wiki and toefl file paths...
+wiki: C:\Users\MehmetEminMumcu\Desktop\memn\hacettepe\cmp614\assignment2\resources\assign2.articles
+toefl: C:\Users\MehmetEminMumcu\Desktop\memn\hacettepe\cmp614\assignment2\resources\toefl_stemmed.txt
+
+K: 600
+EPSILON: 50,0
+
+vocabulary size: 50000
+Questions size: 80
+Reduced matrix size: 50000 X 600
+
+#############################
+QUESTION            ANSWER              GUESS               CORRECTNESS
+enorm               tremend             tremend             TRUE
+provis              stipul              interpret           FALSE
+haphazardli         randomli            linearli            FALSE
+promin              conspicu            ancient             FALSE
+zenith              pinnacl             pinnacl             TRUE
+flaw                imperfect           imperfect           TRUE
+urgent              desper              typic               FALSE
+consum              eaten               suppli              FALSE
+advent              come                arrest              FALSE
+concis              succinctli          powerfulli          FALSE
+salut               greet               greet               TRUE
+solitari            alon                alon                TRUE
+hasten              acceler             accompani           FALSE
+persever            endur               disturb             FALSE
+fanci               imagin              imagin              TRUE
+show                demonstr            demonstr            TRUE
+constantli          continu             rapidli             FALSE
+issu                subject             benefit             FALSE
+furnish             suppli              suppli              TRUE
+costli              expens              expens              TRUE
+recogn              acknowledg          success             FALSE
+spot                locat               sea                 FALSE
+make                earn                earn                TRUE
+often               frequent            frequent            TRUE
+easygo              relax               bore                FALSE
+debat               argument            argument            TRUE
+narrow              thin                clear               FALSE
+arrang              plan                studi               FALSE
+infinit             limitless           structur            FALSE
+showi               strike              incident            FALSE
+levi                impos               request             FALSE
+deftli              skillfulli          humor               FALSE
+distribut           circul              circul              TRUE
+discrep             differ              differ              TRUE
+prolif              product             product             TRUE
+unmatch             unequ               emul                FALSE
+peculiarli          uniqu               suspici             FALSE
+hue                 color               color               TRUE
+hind                rear                hairi               FALSE
+highlight           accentu             restor              FALSE
+hastili             hurriedli           chronolog           FALSE
+temper              mild                cold                FALSE
+grin                smile               exercis             FALSE
+verbal              oral                oral                TRUE
+physician           doctor              doctor              TRUE
+essenti             basic               basic               TRUE
+keen                sharp               famou               FALSE
+situat              posit               empti               FALSE
+princip             major               major               TRUE
+slowli              gradual             effect              FALSE
+built               construct           construct           TRUE
+task                job                 materi              FALSE
+unlik               improb              disagre             FALSE
+halfheartedli       apathet             bipartisanli        FALSE
+annal               chronicl            chronicl            TRUE
+wildli              furious             abruptli            FALSE
+hail                acclaim             address             FALSE
+command             masteri             observ              FALSE
+concoct             devis               supervis            FALSE
+prospect            potenti             promin              FALSE
+gener               broadli             controversi         FALSE
+sustain             prolong             lower               FALSE
+peril               danger              danger              TRUE
+tranquil            peac                happi               FALSE
+dissip              dispers             isol                FALSE
+primarili           chiefli             consist             FALSE
+colloqui            convers             incorrect           FALSE
+resolv              settl               settl               TRUE
+feasibl             possibl             permit              FALSE
+expediti            rapidli             repeatedli          FALSE
+percentag           proport             volum               FALSE
+termin              end                 end                 TRUE
+uniform             alik                complex             FALSE
+figur               solv                divid               FALSE
+suffici             enough              enough              TRUE
+fashion             manner              manner              TRUE
+market              sold                sold                TRUE
+bigger              larger              larger              TRUE
+root                origin              origin              TRUE
+normal              ordinarili          period              FALSE
+#############################
+
+NOT FOUND IN VOCABULARY: 14
+CORRECT COUNT: 30
+WRONG COUNT: 50
+
+
+BUILD SUCCESSFUL in 9m 20s
+
+Result 2
+
