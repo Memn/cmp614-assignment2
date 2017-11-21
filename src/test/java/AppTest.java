@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.DoubleStream;
@@ -58,7 +59,7 @@ public class AppTest {
 
     @Test
     public void testGenerateRandomIV() throws Exception {
-        short[] randomIV = ReducedMatrixBuilder.getInstance().generateRandomIV(0.1f);
+        short[] randomIV = ReducedWord2DocumentMatrixBuilder.getInstance().generateRandomIV(0.1f);
         IntStream.Builder builder = IntStream.builder();
         for (short i : randomIV) {
             builder.add(i);
@@ -68,7 +69,7 @@ public class AppTest {
         Assert.assertEquals(stream.filter(n -> n == -1).count(), 10);
         Assert.assertEquals(stream.filter(n -> n == 0).count(), 80);
 
-        randomIV = ReducedMatrixBuilder.getInstance().generateRandomIV(0.32f);
+        randomIV = ReducedWord2DocumentMatrixBuilder.getInstance().generateRandomIV(0.32f);
         builder = IntStream.builder();
         for (short i : randomIV) {
             builder.add(i);
@@ -83,15 +84,15 @@ public class AppTest {
 
     @Test
     public void testGenerateRandomVector() throws Exception {
-        float[] randomVector = ReducedMatrixBuilder.getInstance().generateRandomVector(0.12f,
-                ReducedMatrixBuilder.getInstance().generateRandomIV(0.3f), 20);
+        float[] randomVector = ReducedWord2DocumentMatrixBuilder.getInstance().generateRandomVector(0.12f,
+                ReducedWord2DocumentMatrixBuilder.getInstance().generateRandomIV(0.3f), 20);
         float[] finalRandomVector = randomVector;
         DoubleStream ds = IntStream.range(0, randomVector.length).mapToDouble(i -> finalRandomVector[i]);
         Assert.assertEquals(randomVector.length, 20);
         Assert.assertNotEquals("All are same!", ds.distinct().count(), 1);
 
-        randomVector = ReducedMatrixBuilder.getInstance().generateRandomVector(0.12f,
-                ReducedMatrixBuilder.getInstance().generateRandomIV(0.3151f), 600);
+        randomVector = ReducedWord2DocumentMatrixBuilder.getInstance().generateRandomVector(0.12f,
+                ReducedWord2DocumentMatrixBuilder.getInstance().generateRandomIV(0.3151f), 600);
         ds = IntStream.range(0, randomVector.length).mapToDouble(i -> finalRandomVector[i]);
         Assert.assertEquals(randomVector.length, 600);
         Assert.assertNotEquals("All are same!", ds.distinct().count(), 1);
@@ -105,7 +106,7 @@ public class AppTest {
         Map<String, Integer> vocabulary = VocabularyBuilder.getInstance().build(TESTING_ARTICLES_FILE_PATH);
         System.out.println("Vocabulary size: " + vocabulary.size());
 
-        float[][] reducedMatrix = ReducedMatrixBuilder.getInstance().build(TESTING_ARTICLES_FILE_PATH, vocabulary, K, EPSILON);
+        float[][] reducedMatrix = ReducedWord2DocumentMatrixBuilder.getInstance().build(TESTING_ARTICLES_FILE_PATH, vocabulary, K, EPSILON);
         Assert.assertEquals(reducedMatrix[0].length, K);
         Assert.assertEquals(reducedMatrix.length, vocabulary.size());
 
@@ -126,7 +127,7 @@ public class AppTest {
 
         List<String[]> toeflQuestions = ToeflQuestionAnswerer.getInstance().readToeflQuestions(TOEFL_QUESTIONS_FILE_PATH);
 
-        float[][] reduced = ReducedMatrixBuilder.getInstance().build(TESTING_ARTICLES_FILE_PATH, vocabulary, K, EPSILON);
+        float[][] reduced = ReducedMatrixBuilder.build(TESTING_ARTICLES_FILE_PATH, vocabulary, K, EPSILON, true);
 
 
         System.out.println("vocabulary size: " + vocabulary.size());
@@ -155,5 +156,53 @@ public class AppTest {
             answers[i] = ToeflQuestionAnswerer.getInstance().makeRandomGuess();
         }
         return answers;
+    }
+
+    @Test
+    public void testUpdateOccurrencesInWindow() throws Exception {
+
+        Map<String, Integer> vocabulary = generateVocabulary();
+
+        float[][] reduced = new float[5][5];
+        String[][] documents = {
+                {"a", "a", "b", "c", "d", "b"},
+                {"a", "b", "c", "a", "e", "a"},
+                {"a", "b", "e"},
+                {"b", "b", "a", "c"},
+                {"c", "a", "b"},
+                {"a", "e", "b", "c", "d"}
+        };
+        float[][] randomVector = {
+                {0, 1, -1},
+                {-1, 1, 0},
+                {0, -1, 1},
+                {1, 0, -1},
+                {-1, 0, 1}
+        };
+        float[][] randomVector2 = {
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 0, 1}
+
+        };
+        for (int i = 0; i < documents.length; i++) {
+            for (int j = 0; j < documents[i].length; j++) {
+                ReducedWord2WordMatrixBuilder.getInstance().
+                        updateOccurrencesInWindow(vocabulary, reduced, documents[i], j, 1, randomVector2);
+            }
+        }
+
+    }
+
+    private Map<String, Integer> generateVocabulary() {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("a", 0);
+        map.put("b", 1);
+        map.put("c", 2);
+        map.put("d", 3);
+        map.put("e", 4);
+        return map;
     }
 }

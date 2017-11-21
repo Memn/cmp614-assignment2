@@ -44,7 +44,8 @@ class App {
 
             System.out.println();
 
-            app.run(wiki, toefl, K, EPSILON);
+            boolean word2Word = Boolean.parseBoolean(prop.getProperty("Word2Word"));
+            app.run(wiki, toefl, K, EPSILON, word2Word);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -52,16 +53,17 @@ class App {
 
     }
 
-    private void run(String wiki, String toefl, int k, float epsilon) throws IOException {
+    private void run(String wiki, String toefl, int k, float epsilon, boolean word2Word) throws IOException {
 
         Map<String, Integer> vocabulary = VocabularyBuilder.getInstance().build(wiki);
 
         List<String[]> toeflQuestions = ToeflQuestionAnswerer.getInstance().readToeflQuestions(toefl);
 
-        float[][] reduced = ReducedMatrixBuilder.getInstance().build(wiki, vocabulary, k, epsilon);
+        float[][] reduced;
+        int[] answers;
 
-        int[] answers = ToeflQuestionAnswerer.getInstance().answerToeflQuestions(reduced, toeflQuestions, vocabulary);
-
+        reduced = ReducedMatrixBuilder.build(wiki, vocabulary, k, epsilon, word2Word);
+        answers = ToeflQuestionAnswerer.getInstance().answerToeflQuestions(reduced, toeflQuestions, vocabulary);
 
         System.out.println("vocabulary size: " + vocabulary.size());
         System.out.println("Questions size: " + toeflQuestions.size());
@@ -70,6 +72,7 @@ class App {
         System.out.println();
 
         printAnswers(toeflQuestions, answers);
+
     }
 
     static void printAnswers(List<String[]> toeflQuestions, int[] answers) {

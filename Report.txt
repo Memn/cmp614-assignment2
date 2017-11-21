@@ -12,6 +12,9 @@ I did not make much tricks except the in the hint file.
 
 **Result 1**
 
+
+**Word-Term Matrices**
+
 Welcome to Toefl word matcher.
 Looking for wiki and toefl file paths...
 wiki: C:\Users\MehmetEminMumcu\Desktop\memn\hacettepe\cmp614\assignment2\resources\assign2.articles
@@ -115,5 +118,110 @@ WRONG COUNT: 50
 
 BUILD SUCCESSFUL in 9m 20s
 
-Result 2
+**Result 2**
+
+Welcome to Toefl word matcher.
+Looking for wiki and toefl file paths...
+wiki: C:\Users\MehmetEminMumcu\Desktop\memn\hacettepe\cmp614\assignment2\resources\assign2.articles
+toefl: C:\Users\MehmetEminMumcu\Desktop\memn\hacettepe\cmp614\assignment2\resources\toefl_stemmed.txt
+Looking for K and EPSILON values...
+K: 1800
+EPSILON: 8,0
+
+vocabulary size: 50000
+Questions size: 80
+Reduced matrix size: 50000 X 1800
+
+#############################
+QUESTION            ANSWER              GUESS               CORRECTNESS
+enorm               tremend             uniqu               FALSE
+provis              stipul              interrel            FALSE
+haphazardli         randomli            dens                FALSE
+promin              conspicu            batter              FALSE
+zenith              pinnacl             complet             FALSE
+flaw                imperfect           crude               FALSE
+urgent              desper              tent                FALSE
+consum              eaten               suppli              FALSE
+advent              come                financ              FALSE
+concis              succinctli          powerfulli          FALSE
+salut               greet               ceremoni            FALSE
+solitari            alon                restless            FALSE
+hasten              acceler             determin            FALSE
+persever            endur               disturb             FALSE
+fanci               imagin              logic               FALSE
+show                demonstr            demonstr            TRUE
+constantli          continu             rapidli             FALSE
+issu                subject             benefit             FALSE
+furnish             suppli              impress             FALSE
+costli              expens              complic             FALSE
+recogn              acknowledg          acknowledg          TRUE
+spot                locat               locat               TRUE
+make                earn                earn                TRUE
+often               frequent            chemic              FALSE
+easygo              relax               relax               TRUE
+debat               argument            competit            FALSE
+narrow              thin                poison              FALSE
+arrang              plan                studi               FALSE
+infinit             limitless           limitless           TRUE
+showi               strike              entertain           FALSE
+levi                impos               believ              FALSE
+deftli              skillfulli          occasion            FALSE
+distribut           circul              research            FALSE
+discrep             differ              wavelength          FALSE
+prolif              product             product             TRUE
+unmatch             unequ               unrecogn            FALSE
+peculiarli          uniqu               patriot             FALSE
+hue                 color               glare               FALSE
+hind                rear                muscular            FALSE
+highlight           accentu             restor              FALSE
+hastili             hurriedli           shrewdli            FALSE
+temper              mild                windi               FALSE
+grin                smile               smile               TRUE
+verbal              oral                verbos              FALSE
+physician           doctor              nurs                FALSE
+essenti             basic               basic               TRUE
+keen                sharp               sharp               TRUE
+situat              posit               isol                FALSE
+princip             major               numer               FALSE
+slowli              gradual             rare                FALSE
+built               construct           organ               FALSE
+task                job                 shop                FALSE
+unlik               improb              differ              FALSE
+halfheartedli       apathet             bipartisanli        FALSE
+annal               chronicl            chronicl            TRUE
+wildli              furious             furious             TRUE
+hail                acclaim             judg                FALSE
+command             masteri             masteri             TRUE
+concoct             devis               devis               TRUE
+prospect            potenti             particular          FALSE
+gener               broadli             controversi         FALSE
+sustain             prolong             lower               FALSE
+peril               danger              bind                FALSE
+tranquil            peac                happi               FALSE
+dissip              dispers             disguis             FALSE
+primarili           chiefli             cautious            FALSE
+colloqui            convers             convers             TRUE
+resolv              settl               examin              FALSE
+feasibl             possibl             permit              FALSE
+expediti            rapidli             actual              FALSE
+percentag           proport             proport             TRUE
+termin              end                 pose                FALSE
+uniform             alik                alik                TRUE
+figur               solv                solv                TRUE
+suffici             enough              physiolog           FALSE
+fashion             manner              manner              TRUE
+market              sold                frozen              FALSE
+bigger              larger              closer              FALSE
+root                origin              ritual              FALSE
+normal              ordinarili          period              FALSE
+#############################
+
+NOT FOUND IN VOCABULARY: 80
+CORRECT COUNT: 19
+WRONG COUNT: 61
+
+
+BUILD SUCCESSFUL in 12m 19s
+
+**Result 3**
 
